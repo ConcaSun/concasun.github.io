@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>给编码 Agent 装上「纪律」：Superpowers 是怎么做到的</title>
+<style>
+  :root{
+    --bg:#eef1f6; --paper:#ffffff; --ink:#1b2430; --muted:#5c6b7a;
+    --accent:#f2661a; --accent-2:#ff8a3d; --navy:#0e1a2b; --line:#e3e8f0;
+    --codebg:#111a28; --codetx:#dce6f2; --ok:#1f7a5c; 
+    --radius:14px; --shadow:0 10px 30px rgba(15,30,55,.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.85; font-size:16.5px; -webkit-font-smoothing:antialiased;
+  }
+  code,kbd,.code{ font-family:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace; }
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,#0e1a2b 0%,#13283f 55%,#1b3a57 100%);
+    color:#f4f7fb; padding:58px 24px 50px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero::after{content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 18% 120%, rgba(242,102,26,.28), transparent 42%),
+               radial-gradient(circle at 85% -10%, rgba(255,138,61,.18), transparent 40%);
+    pointer-events:none;}
+  .hero .wrap{position:relative; z-index:1; max-width:900px; margin:0 auto;}
+  .badge{display:inline-block;font-size:13px;letter-spacing:.06em;
+    border:1px solid rgba(255,255,255,.28);color:#ffd9bf;padding:5px 13px;border-radius:999px;margin-bottom:20px;font-weight:600;}
+  .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.28;margin:0 0 18px;font-weight:800;letter-spacing:-.01em;}
+  .hero .lede{font-size:clamp(15px,2.4vw,18px);color:#c9d6e4;max-width:720px;margin:0 auto 26px;}
+  .stat-grid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+  .stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 18px;min-width:150px;}
+  .stat b{display:block;font-size:22px;color:#ffcf9f;font-weight:800;letter-spacing:.02em;}
+  .stat span{font-size:12.5px;color:#b9c7d6;}
+  .toc{max-width:900px;margin:18px auto 0;text-align:center;}
+  .toc a{display:inline-block;margin:6px 5px;padding:7px 14px;border:1px solid rgba(255,255,255,.3);color:#e7eef6;
+    border-radius:9px;text-decoration:none;font-size:13.5px;background:rgba(255,255,255,.05);transition:.15s;}
+  .toc a:hover{background:var(--accent);border-color:var(--accent);}
+
+  /* body */
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px;}
+
+  .article{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);
+    margin:-24px auto 40px; padding:36px 42px 44px; position:relative; z-index:2;}
+  @media(max-width:640px){ .article{padding:24px 20px;border-radius:12px;} }
+
+  .article h2{font-size:25px;margin:0 0 8px;padding-top:30px;color:var(--navy);letter-spacing:-.01em;}
+  .article h3{font-size:19.5px;margin:34px 0 6px;color:#1d3349;}
+  .article h4{font-size:16.5px;margin:24px 0 6px;color:#33465a;letter-spacing:.01em;}
+  .article p{margin:12px 0;color:#23303e;}
+  .article strong{color:#142135;font-weight:700;}
+  em{color:#a3471a;font-style:italic;background:transparent;padding:0;}
+  blockquote em{color:#c44500;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px dashed rgba(242,102,26,.5);}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .pnum{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff;border-radius:8px;padding:0 9px;margin-right:9px;font-size:14px;vertical-align:2px;}
+
+  /* quote card */
+  blockquote{background:#fff6ee;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;
+    margin:16px 0;padding:13px 18px;color:#5a3a24;font-size:15px;}
+  blockquote p{margin:6px 0;color:#5a3a24;}
+  blockquote p:first-child{margin-top:0;} blockquote p:last-child{margin-bottom:0;}
+  blockquote .tag{font-weight:700;color:#c44500;}
+
+  /* code blocks */
+  pre{background:var(--codebg);color:var(--codetx);border-radius:10px;padding:15px 18px;
+    overflow-x:auto;line-height:1.62;font-size:13px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);}
+  pre code{background:none;color:inherit;padding:0;font-size:13px;}
+  code{background:#ecf1f7;color:var(--accent);border-radius:5px;padding:1px 6px;font-size:.86em;}
+  pre .hl{color:#ffd27a;}
+
+  /* list */
+  ul,ol{padding-left:26px;}
+  li{margin:7px 0;}
+  ul>li::marker{color:var(--accent);}
+  ol>li::marker{color:var(--accent);font-weight:700;}
+  .lita{font-weight:800;color:var(--navy);}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px;line-height:1.6;}
+  thead th{background:var(--navy);color:#f4f7fb;text-align:left;font-weight:650;}
+  th,td{border:1px solid var(--line);padding:9px 12px;vertical-align:top;}
+  tbody tr:nth-child(even){background:#f7f9fc;}
+  td code{background:#e7edf4;}
+
+  .flow{background:#f3f7fb;border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin:16px 0;
+    font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;color:var(--ink);white-space:nowrap;}
+  .arrow{color:var(--accent);font-weight:800;}
+
+  .note{background:#eaf4ff;border-left:4px solid #2f7ce0;border-radius:0 8px 8px 0;padding:12px 15px;font-size:15px;color:#1e3a5f;margin:16px 0;}
+
+  .lead{font-size:17px;color:#23303e;}
+  hr{border:none;border-top:1px solid var(--line);margin:26px 0;}
+  .foot{max-width:880px;margin:0 auto 40px;color:var(--muted);font-size:13px;padding:0 22px;}
+
+  @media print{ body{background:#fff;} .article{box-shadow:none;margin:0;} .hero{background:#0e1a2b;} }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="badge">TECH DEEP-DIVE · 技术分析</div>
+    <h1>给编码 Agent 装上「纪律」<br>Superpowers 是怎么做到的</h1>
+    <p class="lede">把「软件工程纪律」从建议变成自动化行为——一套开源给十几种 coding agent 的 skills 方法论：它是什么、为何受欢迎、以及源码怎么实现。</p>
+    <div class="stat-grid">
+      <div class="stat"><b>283,000+</b><span>GitHub ⭐ Star</span></div>
+      <div class="stat"><b>14</b><span>内置 Skills</span></div>
+      <div class="stat"><b>13+</b><span>支持的 Harness</span></div>
+      <div class="stat"><b>v6.x</b><span>持续演进</span></div>
+    </div>
+    <nav class="toc" aria-label="目录">
+      <a href="#p1">① 它是什么</a>
+      <a href="#p2">② 为何受欢迎</a>
+      <a href="#p3">③ 源码实现解剖</a>
+      <a href="#p4">④ 总结与启示</a>
+    </nav>
+  </div>
+</header>
+
+<div class="article" id="top">
+
+  <blockquote>
+    <p><span class="tag">它有多火</span>：GitHub 星数已达 <strong>283,000+</strong>（约 28.3 万颗 Star），是目前「把软件工程方法论编码成 Skill」这一赛道里最受关注、快速出圈的开源项目之一。</p>
+    <p><span class="tag">阅读对象</span>：想了解、上手并弄懂 Superpowers 的 AI 编程工具使用者与开发者。</p>
+    <p><span class="tag">素材来源</span>：本文分析基于github仓库源码（<code>obra/superpowers</code>，v6.3.0 附近主干）的实地阅读，直接引用 <code>skills/</code>、<code>hooks/</code>、<code>scripts/</code>、<code>README.md</code> 中的真实内容。</p>
+    <p><span class="tag">定位说明</span>：Superpowers 这是一个开源「skills 方法论仓库」，与「把工程流程写进提示词一次性灌给 LLM」的做法不同——它强调按事件与任务在合适的时机自动触发对应的、经 TDD 式打磨的文档。</p>
+  </blockquote>
+
+  <h2 id="p1"><span class="pnum">01</span>第一部分：Superpowers 是什么</h2>
+  <p>Superpowers 官方一句话把它定义为：</p>
+  <blockquote><p>Superpowers is a <strong>complete software development methodology</strong> for your coding agents, built on top of a set of <strong>composable skills</strong> and some <strong>initial instructions</strong> that make sure your agent uses them.</p></blockquote>
+  <p>翻译过来是：<strong>一套面向你的编码 Agent 的、完整的软件开发方法论</strong>，构建在「一组可组合的 skill」与「一些确保你的 Agent 真的会用它们的开场指令」之上。</p>
+  <p>这个仓库存放在 GitHub 的 <code>obra/superpowers</code>，由 <a href="https://blog.fsck.com">Jesse Vincent</a> 及其所在的 <a href="https://primeradiant.com">Prime Radiant</a> 团队维护，是 AI 编程社区里高关注度快速走红的一个开源项目（准确的 star 数以上方引区块<a href="#top">↑</a>与发布时 GitHub 页面为准）。文中谈到的目录、标签与写法均来自对主干源码的第一手阅读。</p>
+
+  <h3>嵌套的根目录：它不是代码工程，而是一个「插件仓库」</h3>
+  <p>在 <code>git clone</code> 之后，仓库顶层是这样（<code>skills/</code> 是所有方法论的载体）：</p>
+<pre><code>skills/            # 14 个 skill，每个一个子目录
+hooks/             # SessionStart 等由宿主 harness 在会话级触发的脚本
+scripts/           # 打包、发布、同步用辅助脚本
+assets/            # 图片等
+tests/             # shell-lint、插件同步、harness 集成等测试
+docs/              # 面向各 harness 的安装/移植说明
+*.plugin           # 各家 harness 的插件清单入口
+CLAUDE.md / AGENTS.md / GEMINI.md   # 同名 contributor 指引，分别给不同宿主读取</code></pre>
+  <p>值得注意：它<strong>不是一个普通 Python/npm 应用仓库</strong>，而是一个「skills + 插件清单 + session-start hook」的组合体，通过适配不同 harness 的插件入口（<code>.claude-plugin</code>、<code>.codex-plugin</code>、<code>.opencode/plugins</code>、<code>.pi/extensions</code>……）被装入各家宿主。</p>
+
+  <h3>内置的 14 个 skill 家族</h3>
+  <p>仓库实测有 14 个 skill（<code>skills/</code> 下各一个子目录、每份都是独立 <code>SKILL.md</code>）：</p>
+  <table>
+    <thead><tr><th>Skill</th><th>一句话职责</th><th>归属</th></tr></thead>
+    <tbody>
+      <tr><td><code>using-superpowers</code></td><td>会话启动引导，教 agent「先查 skill 再用」，强制技能纪律</td><td>元技能 / 启动</td></tr>
+      <tr><td><code>brainstorming</code></td><td>动手写码前先澄清意图，小需求给出短大纲、大需求走完整设计流程</td><td>流程</td></tr>
+      <tr><td><code>test-driven-development</code></td><td>RED–GREEN–REFACTOR 真·红绿测试驱动</td><td>测试</td></tr>
+      <tr><td><code>systematic-debugging</code></td><td>不瞎猜，按 root-cause 才修复（4 阶段根因）</td><td>调试</td></tr>
+      <tr><td><code>verification-before-completion</code></td><td>提交前跑验证命令并确认输出，再声称完成</td><td>测试/验收</td></tr>
+      <tr><td><code>requesting / receiving-code-review</code></td><td>主动找人 / 被找审查，按严重度分级、技术严谨不表演式附和</td><td>协作</td></tr>
+      <tr><td><code>writing-plans</code></td><td>把已批准的设计拆成「明确到每条命令/校验」的任务清单</td><td>流程</td></tr>
+      <tr><td><code>subagent-driven-development</code></td><td>按 plan 为每个 task 派发全新 subagent，两段式 review（先规格后质量）</td><td>执行</td></tr>
+      <tr><td><code>executing-plans</code></td><td>按 plan 的另一种执行模式（带人类 checkpoint 分批执行）</td><td>执行</td></tr>
+      <tr><td><code>dispatching-parallel-agents</code></td><td>2+ 无共享状态独立任务时的并行派发</td><td>执行 / 编排</td></tr>
+      <tr><td><code>using-git-worktrees</code></td><td>开工前隔离工作区（原生或 git worktree fallback）</td><td>工程</td></tr>
+      <tr><td><code>finishing-a-development-branch</code></td><td>收尾：跑测试、给 merge/PR/keep/discard 选项、清理 worktree</td><td>工程 / 收尾</td></tr>
+      <tr><td><code>writing-skills</code></td><td>作者向：像写代码一样 TDD 一个新的 skill</td><td>元技能</td></tr>
+    </tbody>
+  </table>
+  <p>它们并不是互不相干的散装文件——在<strong>流程编排上有明确先后依赖</strong>。README 的「Basic Workflow」就把主要几条串成了这样一条流水线：</p>
+  <div class="flow">
+    <span class="step">brainstorming</span><span class="arrow">→</span>
+    <span class="step">批准</span><span class="arrow">→</span>
+    <span class="step">using-git-worktrees</span><span class="arrow">→</span>
+    <span class="step">writing-plans</span><span class="arrow">→</span>
+    <span class="step">subagent-driven-dev / executing-plans</span><span class="arrow">→</span>
+    <span class="step">TDD</span><span class="arrow">→</span>
+    <span class="step">requesting-code-review</span><span class="arrow">→</span>
+    <span class="step">finishing-a-branch</span>
+  </div>
+
+  <h3>多 harness：一次写了，十几种 Agent 都能用</h3>
+  <p>Superpowers 刻意做成「跨宿主」的思路很突出。README 的安装段覆盖了 Claude Code、Codex（App/CLI）、Cursor、Devin CLI、Gemini CLI、GitHub Copilot CLI、Grok Build CLI、Kimi Code、OpenCode、Pi、Antigravity、Hermes Agent、Factory Droid 等十多种入口。支撑这一跨宿主能力的是两层机制：</p>
+  <ul>
+    <li><strong>每个宿主各有一份插件清单</strong>（<code>.claude-plugin</code>、<code>.codex-plugin</code>、<code>.cursor-plugin</code>……），让宿主把它识别成一个可安装的插件；</li>
+    <li><strong><code>hooks/</code> 提供了平台无关的 session-start</strong>，细节在第三部分展开。</li>
+  </ul>
+  <div class="note">还需注意：Superpowers 官方<strong>尚未提供 deepseek-harness（DSH）对应的插件入口</strong>，官方安装清单里也没有它。DSH 本地使用通常得走<strong>社区/第三方把官方 skills 适配成 DSH 可加载插件的方案</strong>——适配时把 <code>skills/</code> 里各 skill 包装成能被 DSH 的 <code>skill</code> 工具直接调用的形式，并配一份 DSH 专属的 harness 说明。</div>
+
+  <h3>你会怎么用它</h3>
+  <p>对 Claude Code 用户，最常见的是从官方市场直接装：</p>
+<pre><code>/plugin install superpowers@claude-plugins-official</code></pre>
+  <p>Cursor、Codex、Copilot CLI 各自有自己的安装与搜索命令，安装方式都和宿主绑定。</p>
+
+  <!-- ====================== 第二部分 ====================== -->
+  <hr>
+  <h2 id="p2"><span class="pnum">02</span>第二部分：为什么它受欢迎？它的优点是什么</h2>
+  <p>要理解 Superpowers 为什么火，光看功能清单不够——得先看它解决的是哪个真问题。</p>
+
+  <h3>它解决的根本痛点：LLM 写码不受纪律约束</h3>
+  <p>直接让一个大型语言模型去「写个待办应用」或「把那个 bug 修掉」，它往往会得到一句模糊指令后马上开始逐行敲代码：先写产品代码、后来才补补测试、遇到失败就乱猜原因、差不多绿了就当完成。这正是现在所有编码 Agent 用户共同的挫败来源——<strong>能力强但不可靠</strong>。</p>
+  <p>Superpowers 的立场可以浓缩成一句很硬的话：把「硅谷团队的软件工程纪律」（先厘清需求再做设计、真红绿 TDD、逐个任务验证、主动代码评审、反对过度复杂与重复）<strong>不是用「建议」灌输，而是用「不可违背的行为门槛」编码进去</strong>。</p>
+  <p>它在仓库自己的文档里就是这么自述的（README「How it works」一段，描述设计定稿后写出的实施计划）：</p>
+  <blockquote><p>…your agent puts together an implementation plan that's <em>clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing</em> to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.</p></blockquote>
+  <p><em>它甚至假设看这份实施计划的对象是「狂热但没品味、没判断力、没项目上下文、还讨厌测试的新手工程师」</em>——所有步骤都被写到了傻瓜能执行的程度。</p>
+  <p>README 的 Philosophy 小节则把价值观列成四句：TDD 先行、过程优于瞎猜、化繁为简、<strong>证据高于口头声明</strong>（<em>Evidence over claims — Verify before declaring success</em>）。</p>
+  <div class="note">把「流程」从口头提醒改成 agent 必须遵守的强制步骤——这是 Superpowers 最核心的差异化。</div>
+
+  <h3>优点拆解</h3>
+  <ol>
+    <li><span class="lita">自动触发，几乎零学习成本。</span>「凡是你说『这只是个简单问题』的场景，其实都是一次任务」——这些反合理化内容被写进启动注入里，让新用户不必背任何触发词，属于「开箱就让 agent 行为改变」。</li>
+    <li><span class="lita">把方法论做成「插件/版本化」，而非写死的 prompt。</span>skill 可被<strong>独立迭代、回滚、评测</strong>，还带配套 eval 仓库（<code>superpowers-evals</code> 用真实 tmux 会话判定合规）。prompt 是死文字，skill 是可维护、可验证的「程序」。</li>
+    <li><span class="lita">可组合的流水线，而非大而全的单文件。</span>不塞一段 5000 行的超长 prompt，而是拆成 14 个接口清晰、职责单一的 skill，彼此用流程编排衔接。</li>
+    <li><span class="lita">面向 agent 行为的「反合理化」设计。</span>针对「这小事不用走流程吧」的念头逐条写进 Red Flags 表——是写给「不情愿的 LLM」读的流程文档，不是写给人读的。</li>
+    <li><span class="lita">零第三方依赖 + 跨 harness。</span>「zero-dependency plugin by design」，换 IDE 不失方法论；对十几种 harness 做了适配。</li>
+    <li><span class="lita">围绕真实使用中的 bug 持续打磨。</span>release notes 会记录来自真实的坑（如修复 <code>bash 5.3</code> 下 heredoc 挂起）。</li>
+  </ol>
+
+  <h3>略带批判：没有灵丹妙药的部分</h3>
+  <p>作为独立分析，不该只报喜——</p>
+  <ul>
+    <li><strong>全流程仪式感并不对每种任务都划算。</strong>brainstorming 连「改一行 flag」也会要求两句短设计 + 点头 gate，对速改型开发者可能显得重。</li>
+    <li><strong>它依赖「它的方法论假设是对的」。</strong>若你认为原型、临时脚本、自由探索本就不该有这么多 gate，这套偏「重编码实践」的方法论未必处处最优。</li>
+    <li><strong>「自动触发」依赖宿主真的承接会话启动注入。</strong>没有就只是「躺在磁盘、不会被自动想起的 md」——所以官方 Integration 验收极严：新宿主必须在全新会话里敲一句 <em>Let's make a react todo list</em> 就自动触发 brainstorming，否则不算有效集成。</li>
+    <li><strong>外部可独立复核的证据偏少。</strong>第三方基准、横向评价的可信对比例证不多，星数这类外部数值建议以官方 page 为准。</li>
+  </ul>
+
+  <!-- ====================== 第三部分 ====================== -->
+  <hr>
+  <h2 id="p3"><span class="pnum">03</span>第三部分：从源码看它的实现</h2>
+  <p>这一部分瞄准两个问题：<strong>md 是怎么写的</strong>、<strong>script 是怎么写的</strong>，再连起来讲清「skill 如何被自动触发」这条运行链路。</p>
+
+  <h3>3.1 · .md 怎么写：解剖一份 SKILL.md</h3>
+  <p>每个 skill 的主文件统一叫 <code>SKILL.md</code>，顶层由一个 <strong>YAML frontmatter</strong> + 自由格式 Markdown 正文组成。frontmatter 是 harness 用来把它注册进「Skill 工具/索引」的元数据；正文才是决定 agent 行为的内容。以元技能 <code>using-superpowers/SKILL.md</code> 为例：</p>
+<pre><code>---
+name: using-superpowers
+description: Use when starting any conversation - establishes how to
+  find and use skills, requiring skill invocation before ANY response
+  including clarifying questions
+---</code></pre>
+  <p><code>name</code> 是带连字符的唯一 ID；<code>description</code> 是最关键的<strong>触发信号</strong>——它要写成「在什么场景下『应该』被触发」的高信号引导句，harness 靠比对当前任务与该 description 决定要不要载入这份文档。作者甚至会把 <em>You MUST use this before any creative work</em> 这类「强制词」嵌进去以提升命中。</p>
+
+  <p>内核组织有一套非常统一的「写法六式」——</p>
+<ol>
+  <li><span class="lita">门控块把「不许做」提到视觉上无法忽略。</span>
+      brainstorming 开头有 <code>&lt;HARD-GATE&gt;</code>，<code>using-superpowers</code> 里是 <code>&lt;EXTREMELY-IMPORTANT&gt;</code>。这些 XML/HTML 式标签让模型把「这是规则」与「这是解释」区分开，例如：
+<pre><code>&lt;EXTREMELY-IMPORTANT&gt;
+If you think there is even a 1% chance a skill might apply...
+YOU ABSOLUTELY MUST invoke the skill.
+&lt;/EXTREMELY-IMPORTANT&gt;</code></pre></li>
+  <li><span class="lita">用「Red Flags」表格专门堵 agent 的借口。</span>
+     文档预设读者「会自己找台阶」，于是把台阶逐条列出。例如 <code>using-superpowers</code> 里的 Rationalizing 检查表（原表节选）：
+    <table>
+      <thead><tr><th>Thought</th><th>Reality</th></tr></thead>
+      <tbody>
+        <tr><td>「这只是个简单问题」</td><td>问题都是任务，先查 skill。</td></tr>
+        <tr><td>「我需要更多上下文再问」</td><td>skill 检查要在澄清问题之前。</td></tr>
+        <tr><td>「这不需要走正式流程」</td><td>如果存在 skill，就用它。</td></tr>
+        <tr><td>「我先探索下代码库」</td><td>skill 告诉你怎么探索，先查。</td></tr>
+        <tr><td>「我大概知道 skill 讲什么」</td><td>skill 会演进，请读当前版本。</td></tr>
+      </tbody>
+    </table></li>
+  <li><span class="lita">正文 = 路径判定 + 逐条可勾选清单。</span>brainstorming 把任务分成 spike / bounded / architectural 三条路径、每条给出编号清单，并把「先把任务分类说出来」写成显式行为。</li>
+  <li><span class="lita">用流程图 / 表表达「过程」。</span>仓库里连状态机都用 <code>dot</code> 图嵌在 md 里画成分支，能用图/表/命令表达的就不写啰嗦散文。</li>
+  <li><span class="lita">控文件体积、分层引用。</span>SKILL.md 通常 60–700 行，重型参考独立成文件（<code>references/</code> 放各 harness 平台差异说明，如 codex-tools），正文保持精准命中当前判断、必要时再展开重型参考。</li>
+  <li><span class="lita">把方法论讲成可复用模板。</span><code>writing-skills</code> 甚至说：写 skill 本身就该像 TDD——先用子 agent「压测」观察它会不会违规（RED baseline），再写正文（production），验证合规（GREEN）、再堵漏洞（refactor）。这套反合理化约束是被「评测失败逼出来的」，不是漂亮话。</li>
+</ol>
+
+<h3>3.2 · script / hook 怎么写：让 skill 在正确时机自动出现</h3>
+  <p>如果 md 是「大脑里的规则」，<code>hooks/</code> 与脚本就是「叫醒大脑记得用规则的闹钟」。钥匙在这个目录里：</p>
+<pre><code>hooks/
+  hooks.json            # Claude Code 使用（SessionStart + matcher 事件）
+  hooks-cursor.json     # Cursor 单独（sessionStart 事件格式不同）
+  run-hook.cmd          # cmd + bash 双栖跨平台调度器
+  session-start         # 无扩展名的真正注入脚本</code></pre>
+
+  <h4>a) <code>hooks.json</code>：声明「什么事触发什么」</h4>
+<pre><code>{
+  "hooks": {
+    "SessionStart": [
+      { "matcher": "startup|clear|compact",
+        "hooks": [
+          { "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/run-hook.cmd\" session-start",
+            "shell": "bash", "async": false }
+        ] } ] } }</code></pre>
+  <p>即：宿主在 session <strong>startup / clear / compact</strong> 时命中该事件，同步执行 <code>run-hook.cmd session-start</code>。<code>async:false</code> 表示它必须被<strong>同步执行</strong>——因为其<strong>副作用是把返回值写进上下文</strong>，得等它。</p>
+
+  <p><strong>跨宿主难点立刻暴露：</strong>hook 配置与事件名随宿主不同——Claude Code 用大写 <code>SessionStart</code> + <code>matcher</code> + 绝对路径；Cursor 用 camelCase <code>sessionStart</code> + 相对命令。所以仓库必须维护多份 json 并让脚本自判平台。</p>
+
+  <h4>b) <code>run-hook.cmd</code>：一个文件同时是 cmd 与 bash</h4>
+  <p>为了让同一段逻辑既能在 Windows(cmd) 又能在类 Unix(bash) 跑，作者用了「双语外壳」——文件片段对 cmd 是批处理、对 bash 是无害注释块：</p>
+<pre><code>: &lt;&lt; 'CMDBLOCK'
+@echo off
+REM Windows 段：找 Git for Windows bash...
+if exist "C:\Program Files\Git\bin\bash.exe" (
+  "C:\Program Files\Git\bin\bash.exe" "%HOOK_DIR%%~1" %2 %3 %4 %5 %6 %7 %8 %9
+  exit /b %ERRORLEVEL%
+)
+... （找不到 bash 则静默 exit /b 0 优雅降级）
+CMDBLOCK
+
+# Unix: run the named script directly
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_NAME="$1"; shift
+exec bash "${SCRIPT_DIR}/${SCRIPT_NAME}" "$@"</code></pre>
+  <p>这里有两个值得记的工程权衡：</p>
+  <ul>
+    <li><strong>hook 脚本刻意不带 <code>.sh</code> 扩展名</strong>——否则 Claude Code 的 Windows 自动探测会把含 .sh 的命令擅自前置 bash，破坏 cmd 路径。</li>
+    <li><strong>没有 bash 就静默退出 0</strong>——降级不报错：插件仍可用，只是少了一次上下文注入。</li>
+  </ul>
+
+  <h4>c) <code>session-start</code>：把整份 using-superpowers 灌进上下文</h4>
+  <p>不带扩展名的 <code>session-start</code> 是整条链路的心脏。剥掉注释后，骨架（示意性精简）长这样：</p>
+<pre><code>#!/usr/bin/env bash
+set -euo pipefail
+PLUGIN_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+# 读整份 using-superpowers 内容
+content=$(cat "$PLUGIN_ROOT/skills/using-superpowers/SKILL.md")
+
+# 用 bash 参数替换做 JSON 转义（单遍，比逐字符 for 快几个数量级）
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"; s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"; s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+escaped="$(escape_for_json "$content")"
+session_context="&lt;EXTREMELY-IMPORTANT&gt;
+You have superpowers.
+**Below is the full content of your 'superpowers:using-superpowers' skill…**
+${escaped}
+&lt;/EXTREMELY-IMPORTANT&gt;"</code></pre>
+  <p>这段代码里的真实功夫，件件都有据可查的注释：</p>
+  <ul>
+    <li><strong>注入的对象就是「技能本身」</strong>：把整份 <code>using-superpowers/SKILL.md</code> 包进 <code>&lt;EXTREMELY-IMPORTANT&gt;</code> 当作会话的额外上下文——模型一进场就先看到「你拥有 superpowers，下面是教你怎么用技能的技能」。</li>
+    <li><strong>转义用 bash 参数替换</strong> `${s//old/new}`——注释直白写道这是「C 级单遍，几百倍快于字符循环」，是在 session start 里抠毫秒的严谨编码。</li>
+    <li><strong>按平台输出不同 JSON 结构</strong>：Cursor 设了 <code>CURSOR_PLUGIN_ROOT</code> → 顶层 <code>additional_context</code>；Claude Code 设了 <code>CLAUDE_PLUGIN_ROOT</code> → <code>hookSpecificOutput.additionalContext</code>（嵌套）；其余（Copilot CLI 等 SDK 标准）→ 顶层 <code>additionalContext</code>。注释提醒「Claude Code 两个字段都读且不去重，所以只发当前平台那一个」。</li>
+    <li><strong>用 <code>printf</code> 而非 heredoc</strong>——明确点出是为了绕开 bash 5.3+ 读取 heredoc 的挂起 bug（issue #571），连边角 bug 都留了可检索的 issue 号。</li>
+  </ul>
+  <p>回答「script 怎么写」：能不用脚本就不用；真到要处理跨平台/跨宿主时，用 polyglot、显式平台分支，并给每个坑写可读注释。</p>
+
+  <h3>3.3 · 运行链路：为什么你什么都不用做，它会自己启动</h3>
+  <p>把 md 与 hook 拼起来，一条完整链路出现了：</p>
+  <ol>
+    <li>你在宿主里装好并新开会话（或 <code>/clear</code>、<code>/compact</code>）。</li>
+    <li>宿主在 <code>SessionStart</code> 命中 <code>hooks.json</code> 里 <code>matcher: startup|clear|compact</code>。</li>
+    <li>宿主同步执行 <code>run-hook.cmd session-start</code> → 找到 bash → 跑 <code>session-start</code>。</li>
+    <li>它读 <code>using-superpowers/SKILL.md</code>，包进 <code>&lt;EXTREMELY-IMPORTANT&gt;</code>、按平台挑好 schema，作为 <code>additionalContext</code> 返回。</li>
+    <li>宿主把这内容当作「会话第一批上下文」注入——模型在见到你打的任何字之前，就先看到「拥有 superpowers + 有 1% 可能适用就绝对要调 skill」。</li>
+    <li>于是当你打出「<em>我们做个 react 待办吧</em>」时，模型带着启动指令先想「brainstorming 适用」→ 真的去 <code>Skill</code> 载入 <code>brainstorming/SKILL.md</code>——「自动触发」就发生了。</li>
+  </ol>
+  <div class="flow" style="justify-content:flex-start;">
+    <span class="step">会话启动</span><span class="arrow">→</span>
+    <span class="step">SessionStart hook</span><span class="arrow">→</span>
+    <span class="step">注入 using-superpowers</span><span class="arrow">→</span>
+    <span class="step">agent 先查 skill</span><span class="arrow">→</span>
+    <span class="step">自动调 brainstorming…</span>
+  </div>
+  <p>仓库把这条验收做成客观判据：在任意新 harness 里开全新会话、只敲一句</p>
+  <blockquote><p>Let's make a react todo list</p></blockquote>
+  <p>能自动触发 <code>brainstorming</code>（不需要用户手动指定）才叫「真集成」；「只手动拷文件 / 用 npx skills 运行时 shim / 让用户每会话手动 opt-in」都被判不成立。因为它看透了关键事实——<strong>没有 session-start 这条「自举闹钟」，所有 skill 都只是一堆躺在磁盘上、不会被自动想起的 md</strong>。</p>
+
+  <!-- ====================== 第四部分 ====================== -->
+  <hr>
+  <h2 id="p4"><span class="pnum">04</span>第四部分：总结与启示</h2>
+  <p>Superpowers 并没有发明「该做 TDD、该先想清楚需求」这些原则——它把原则从「写给工程师看的手册」翻译成「写给会狡辩的编码 agent 看、会在正确时机自动出现、历经评测打磨的代码」。它受欢迎的本质，是敏锐地识别并解决了一个真实体验问题：</p>
+  <div class="flow" style="justify-content:center;"><span class="step">LLM 有能力</span><span class="arrow">+</span><span class="step">自动注入的纪律</span><span class="arrow">=</span><span class="step">可靠</span></div>
+
+  <p><strong>对你（无论用它还是写同类 skill）的四点收获：</strong></p>
+  <ol>
+    <li><span class="lita">描述决定触发，正文决定行为。</span>想让 skill 真的被用，先把 frontmatter 的 description 写成能高信号命中的触发句，再用 checklist + 门控块钉住硬约束。</li>
+    <li><span class="lita">自动触发胜过手动使用。</span>一个要你手动敲开关的 skill 是「死技能」；真正强的是像 session-start 那样在事件里把「如何正确思考」当上下文喂进去。</li>
+    <li><span class="lita">像写测试那样打磨文档。</span>RED→GREEN→REFACTOR 不只对代码成立——行为类文案靠「压测子 agent + 合规检查」的 eval loop 迭代，而不是一拍脑袋写漂亮话。</li>
+    <li><span class="lita">想跑「业务能力」就往插件层走，别只停在 skill。</span>skill 是「行为方法论」，一个完整能力往往还需注入工具、hooks、开机引导——把若干 skill 连同会话级装配打包成宿主认识的「插件」，层级比单个 skill 更高、更能承载业务闭环。但插件语义依赖 harness 是否支持（清单能否被识别、会话能否被承接）——像我们所处的内部平台 co-claw 就尚未开放插件安装，现阶段只能依赖 skill 层先行。</li>
+  </ol>
+
+  <p>它至今仍是社区里「低门槛、开源、零依赖 + 已打磨 skill + 会话级自动激活」三者结合的典型案例。想给你的 agent 加方法论？把它当成一套值得解剖的成品蓝本——也要记得它自身划的底线：它不是银弹，只在宿主正确承接 bootstrap 时才成立，也只对你的编码风格「恰好需要这种强 gate」时最合适。</p>
+
+  <hr>
+  
+</div>
+
+<div class="foot">HTML 分享演示版 · 由 markdown 分析草稿生成 · Superpowers ← 本文正是用它的 brainstorming / 编辑流程产出的</div>
+</body>
+</html>
