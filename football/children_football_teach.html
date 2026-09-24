@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>少儿足球 8 课时教学大纲</title>
+<style>
+:root{
+  --bg:#f6f7f4; --card:#ffffff; --ink:#1d2529; --muted:#5d6b63;
+  --line:#dde5dd; --accent:#0f7a42; --accent-soft:#e8f3ea;
+  --table-head:#eef4ee; --code-bg:#f1f4f1; --shadow:0 1px 2px rgba(16,40,24,.06),0 8px 24px rgba(16,40,24,.05);
+}
+html[data-theme="dark"]{
+  --bg:#12161a; --card:#1a2027; --ink:#e6ebe9; --muted:#9aa8a0;
+  --line:#2b3439; --accent:#4ec97f; --accent-soft:#1d2c24;
+  --table-head:#212a30; --code-bg:#151a1f; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  font-size:17px; line-height:1.85; -webkit-text-size-adjust:100%;
+}
+a{color:var(--accent)}
+.topbar{
+  position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.4) blur(8px);
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{max-width:1220px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; gap:12px}
+.topbar .brand{font-weight:700; font-size:15px; letter-spacing:.02em; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.btn{
+  border:1px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+  border-radius:999px; padding:6px 14px; font-size:14px; font-family:inherit; line-height:1.5;
+}
+.btn:hover{border-color:var(--accent); color:var(--accent)}
+.layout{max-width:1220px; margin:0 auto; padding:28px 24px 96px; display:flex; gap:36px; align-items:flex-start}
+nav.toc{width:264px; flex:0 0 264px; position:sticky; top:76px; max-height:calc(100vh - 108px); overflow:auto; font-size:14px; line-height:1.6}
+nav.toc h2{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 10px; border:0; padding:0; background:none}
+nav.toc ul{list-style:none; margin:0; padding:0}
+nav.toc li{margin:0}
+nav.toc a{display:block; padding:5px 10px; color:var(--muted); text-decoration:none; border-left:2px solid transparent; border-radius:0 6px 6px 0}
+nav.toc a:hover{color:var(--ink); background:var(--accent-soft)}
+nav.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+nav.toc .lvl3 a{padding-left:22px; font-size:13px}
+main{flex:1 1 auto; min-width:0; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:36px 44px 56px; box-shadow:var(--shadow)}
+h1{font-size:30px; line-height:1.35; margin:0 0 20px; letter-spacing:.01em}
+h2,h3{scroll-margin-top:74px}
+h2{font-size:23px; margin:52px 0 18px; padding:0 0 10px 14px; border-left:5px solid var(--accent); border-bottom:1px solid var(--line)}
+h3{font-size:19px; margin:38px 0 14px; padding:10px 16px; background:var(--accent-soft); border-radius:10px; border-left:4px solid var(--accent)}
+h4{font-size:17px; margin:26px 0 10px}
+p{margin:14px 0}
+strong{font-weight:700}
+hr{border:0; border-top:1px dashed var(--line); margin:34px 0}
+ul,ol{margin:14px 0; padding-left:26px}
+li{margin:7px 0}
+li>ul,li>ol{margin:7px 0}
+code{background:var(--code-bg); padding:2px 6px; border-radius:5px; font-size:.92em; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code-bg); border:1px solid var(--line); border-radius:12px; padding:18px 20px; overflow:auto; font-size:14.5px; line-height:2}
+pre code{background:none; padding:0}
+blockquote.callout{margin:22px 0; padding:14px 20px; background:var(--accent-soft); border-left:4px solid var(--accent); border-radius:0 12px 12px 0; color:var(--ink)}
+blockquote.callout p{margin:0}
+.table-wrap{overflow-x:auto; margin:20px 0}
+table{border-collapse:collapse; width:100%; font-size:15.5px; line-height:1.7}
+th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top}
+th{background:var(--table-head); font-weight:700; white-space:nowrap}
+tbody tr:nth-child(even){background:var(--table-head); background:color-mix(in srgb, var(--table-head) 45%, transparent)}
+.meta{display:grid; gap:6px; margin:0 0 26px; padding:18px 20px; background:var(--accent-soft); border-radius:12px; border:1px solid var(--line)}
+.meta-row{display:flex; gap:10px; font-size:15.5px; flex-wrap:wrap}
+.meta-key{flex:0 0 92px; color:var(--muted)}
+.meta-val{flex:1 1 240px}
+#toTop{
+  position:fixed; right:22px; bottom:22px; z-index:30; display:none;
+  border-radius:50%; width:44px; height:44px; padding:0; font-size:16px;
+  box-shadow:var(--shadow);
+}
+#toTop.show{display:block}
+.mobile-toc{display:none}
+@media (max-width:960px){
+  .layout{padding:18px 16px 80px}
+  nav.toc{display:none}
+  main{padding:24px 20px 44px; border-radius:14px}
+  body{font-size:16.5px}
+  h1{font-size:25px} h2{font-size:20px} h3{font-size:17.5px}
+  .mobile-toc{display:block; margin:0 0 20px; border:1px solid var(--line); border-radius:12px; background:var(--card); padding:12px 16px}
+  .mobile-toc summary{cursor:pointer; font-weight:700; font-size:15px}
+  .mobile-toc ol{margin:10px 0 0; padding-left:20px; font-size:15px}
+}
+@media print{
+  :root{--bg:#fff; --card:#fff; --ink:#000; --line:#bbb; --accent:#0f7a42; --accent-soft:#eef4ee; --table-head:#eee}
+  .topbar,nav.toc,#toTop,.mobile-toc{display:none !important}
+  body{font-size:10.5pt; line-height:1.6}
+  .layout{display:block; padding:0; max-width:none}
+  main{border:0; box-shadow:none; padding:0; border-radius:0}
+  h2{page-break-after:avoid; page-break-before:auto}
+  h3{page-break-after:avoid}
+  table,pre,blockquote,.table-wrap{page-break-inside:avoid}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">少儿足球 8 课时教学大纲</span>
+    <button class="btn" id="themeBtn" type="button">深色</button>
+    <button class="btn" type="button" onclick="window.print()">打印</button>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc">
+    <h2>目录</h2>
+    <ul><li><a href="#h2-1">0. 使用说明（上课前必看，3 分钟读完）</a></li><li class="lvl3"><a href="#h3-1">0.1 三条铁律（安全底线）</a></li><li class="lvl3"><a href="#h3-2">0.2 教练三句话原则</a></li><li class="lvl3"><a href="#h3-3">0.3 集合口令（第一节课就教会，之后一直用）</a></li><li class="lvl3"><a href="#h3-4">0.4 混龄怎么带（6–8 岁和 9–10 岁一起）</a></li><li><a href="#h2-2">1. 每节课统一时间轴（60 分钟通用模板）</a></li><li><a href="#h2-3">2. 八课时总览表</a></li><li><a href="#h2-4">3. 器材与场地准备清单</a></li><li><a href="#h2-5">4. 逐课时详案</a></li><li class="lvl3"><a href="#h3-5">第 1 课时：球感与触球入门</a></li><li class="lvl3"><a href="#h3-6">第 2 课时：带球跑与变向</a></li><li class="lvl3"><a href="#h3-7">第 3 课时：脚内侧传球与停球</a></li><li class="lvl3"><a href="#h3-8">第 4 课时：移动中传接与接应（二过一）</a></li><li class="lvl3"><a href="#h3-9">第 5 课时：射门</a></li><li class="lvl3"><a href="#h3-10">第 6 课时：1v1 攻防</a></li><li class="lvl3"><a href="#h3-11">第 7 课时：五人制规则与站位</a></li><li class="lvl3"><a href="#h3-12">第 8 课时：综合考核与趣味比赛</a></li><li><a href="#h2-6">5. 附录 A：技术考核观察表（1–5 分制）</a></li><li><a href="#h2-7">6. 附录 B：每课记录表（可打印，每节课填一张）</a></li><li><a href="#h2-8">7. 附录 C：常见问题（FAQ）</a></li><li><a href="#h2-9">8. 教练自备：一页速查（课前 30 秒看一眼）</a></li></ul>
+  </nav>
+  <main>
+    <details class="mobile-toc">
+      <summary>目录（点开跳转）</summary>
+      <ol><li><a href="#h2-1">0. 使用说明（上课前必看，3 分钟读完）</a></li><li><a href="#h3-1">0.1 三条铁律（安全底线）</a></li><li><a href="#h3-2">0.2 教练三句话原则</a></li><li><a href="#h3-3">0.3 集合口令（第一节课就教会，之后一直用）</a></li><li><a href="#h3-4">0.4 混龄怎么带（6–8 岁和 9–10 岁一起）</a></li><li><a href="#h2-2">1. 每节课统一时间轴（60 分钟通用模板）</a></li><li><a href="#h2-3">2. 八课时总览表</a></li><li><a href="#h2-4">3. 器材与场地准备清单</a></li><li><a href="#h2-5">4. 逐课时详案</a></li><li><a href="#h3-5">第 1 课时：球感与触球入门</a></li><li><a href="#h3-6">第 2 课时：带球跑与变向</a></li><li><a href="#h3-7">第 3 课时：脚内侧传球与停球</a></li><li><a href="#h3-8">第 4 课时：移动中传接与接应（二过一）</a></li><li><a href="#h3-9">第 5 课时：射门</a></li><li><a href="#h3-10">第 6 课时：1v1 攻防</a></li><li><a href="#h3-11">第 7 课时：五人制规则与站位</a></li><li><a href="#h3-12">第 8 课时：综合考核与趣味比赛</a></li><li><a href="#h2-6">5. 附录 A：技术考核观察表（1–5 分制）</a></li><li><a href="#h2-7">6. 附录 B：每课记录表（可打印，每节课填一张）</a></li><li><a href="#h2-8">7. 附录 C：常见问题（FAQ）</a></li><li><a href="#h2-9">8. 教练自备：一页速查（课前 30 秒看一眼）</a></li></ol>
+    </details>
+    <h1>少儿足球 8 课时教学大纲</h1><div class="meta"><div class="meta-row"><span class="meta-key">适用对象</span><span class="meta-val">6–10 岁混龄小朋友（零基础或刚接触足球）</span></div><div class="meta-row"><span class="meta-key">场地</span><span class="meta-val">小区五人制足球场（真草）</span></div><div class="meta-row"><span class="meta-key">器材</span><span class="meta-val">雪糕筒、地标碟（你自己准备的即可）</span></div><div class="meta-row"><span class="meta-key">课时</span><span class="meta-val">8 课时 × 60 分钟</span></div><div class="meta-row"><span class="meta-key">编写者身份</span><span class="meta-val">有多年踢球经验的业余教练（非持证教练，本大纲按"能照着做"的标准编写）</span></div></div><hr><h2 id="h2-1">0. 使用说明（上课前必看，3 分钟读完）</h2><h3 id="h3-1">0.1 三条铁律（安全底线）</h3><ol><li><strong>不教头球、不教滑铲、不教鱼跃、不教倒钩。</strong> 6–10 岁颈椎和骨骼还在发育，这些动作收益低、受伤风险高，本大纲全程不做。</li><li><strong>真草场地每节课前 2 分钟走一圈检查</strong>：有没有坑洼、石头、玻璃、积水、动物粪便，以及球门是否稳固。湿滑草地降低所有速度类练习的强度。</li><li><strong>不做"排队等"的训练。</strong> 任何需要排队超过 3 人的练习都要改成两路同时进行或缩短轮次。孩子站着等的每一分钟都在流失注意力。</li></ol><h3 id="h3-2">0.2 教练三句话原则</h3><ul><li><strong>多鼓励，少纠正</strong>：一节课对每个孩子至少说一次具体的表扬（"你刚才抬头看了一眼，特别好"）。</li><li><strong>一次只纠一个问题</strong>：孩子同时错三处时，只挑最重要的那个说，其余下节课再说。</li><li><strong>示范要慢、要做对</strong>：讲十句不如慢动作做两次。先做对，再做快。</li></ul><h3 id="h3-3">0.3 集合口令（第一节课就教会，之后一直用）</h3><div class="table-wrap"><table><thead><tr><th>口令</th><th>动作</th></tr></thead><tbody><tr><td>"1、2、3，集合！"</td><td>所有人跑到教练面前站成一排，手放头上（顺便调整呼吸）</td></tr><tr><td>"停！" + 举手</td><td>立刻停住脚、球踩在脚底、看教练</td></tr><tr><td>"看我的脚"</td><td>孩子注意力集中在教练的示范动作上</td></tr><tr><td>"喝水，30 秒"</td><td>每 15 分钟一次补水，夏天增加到每 10 分钟</td></tr></tbody></table></div><h3 id="h3-4">0.4 混龄怎么带（6–8 岁和 9–10 岁一起）</h3><ul><li>每个技术动作都准备了<strong>基础版（6–8 岁）</strong>和<strong>进阶版（9–10 岁）</strong>，同一时间、同一块场地、两套要求。</li><li>大孩子当"小队长"：结对练习时负责数数、捡球、给小孩子做示范。给大孩子一个身份，他们就不会觉得无聊。</li><li>对抗分组按<strong>身高 + 水平</strong>混编，不按年龄分。避免一队全是大孩子把另一队打崩。</li></ul><hr><h2 id="h2-2">1. 每节课统一时间轴（60 分钟通用模板）</h2><p>你只需要记住这一个模板，八节课都照它排：</p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>目的</th><th>组织要点</th></tr></thead><tbody><tr><td>0–8 分</td><td><strong>热身激活</strong></td><td>提升心率、活动关节、集中注意力</td><td>先带球慢跑，再做动态拉伸（不是站着压腿）</td></tr><tr><td>8–28 分</td><td><strong>技术教学</strong></td><td>本课时的核心技术动作</td><td>拆成 2 个 10 分钟的小练习，讲解不超过 90 秒</td></tr><tr><td>28–48 分</td><td><strong>技能游戏 / 对抗</strong></td><td>在压力下用出技术</td><td>有胜负、有规则限制，孩子自己会拼命</td></tr><tr><td>48–56 分</td><td><strong>小场比赛</strong></td><td>把技术用进真实比赛</td><td>4v4 或 5v5，教练随时暂停只讲一句话</td></tr><tr><td>56–60 分</td><td><strong>拉伸 + 总结</strong></td><td>放松、肯定、布置家庭任务</td><td>围圈坐/站，每人说一句今天的收获</td></tr></tbody></table></div><p><strong>时间不够就砍技术教学，别砍比赛。</strong> 孩子来踢球是为了踢球，比赛是最好的老师。</p><p><strong>热身内容库</strong>（每节课挑 3–4 个，各 45 秒）： 高抬腿走 → 后踢腿跑 → 侧滑步 → 开合跳 → 弓步走（不要弓步压腿，走动式）→ 脚踝绕环 → 髋部绕环 → 后退跑 → 变向跑 3 步急停。</p><hr><h2 id="h2-3">2. 八课时总览表</h2><div class="table-wrap"><table><thead><tr><th>课时</th><th>主题</th><th>核心技术</th><th>核心游戏/比赛</th><th>一句话目标</th></tr></thead><tbody><tr><td>1</td><td>球感与触球入门</td><td>脚底踩拉、内外侧拨球、脚内侧触球</td><td>鲨鱼抢球、带球过线</td><td>敢碰球、会用三个部位碰球</td></tr><tr><td>2</td><td>带球跑与变向</td><td>脚背外侧运球、绕杆、变向切球</td><td>四门足球、绕杆接力</td><td>抬头带球、能绕开障碍</td></tr><tr><td>3</td><td>脚内侧传球与停球</td><td>推传动作、第一脚停球</td><td>传球保龄球、抢圈</td><td>5–8 米传准、停住不弹飞</td></tr><tr><td>4</td><td>移动中传接与接应</td><td>迎球接球、三角传球、二过一</td><td>4v2 抢圈、跑位接力</td><td>传完就跑、会接应</td></tr><tr><td>5</td><td>射门</td><td>脚内侧推射、脚背抽射、一停一射</td><td>射门闯关、射门保龄球</td><td>能射进门、知道打准比打狠重要</td></tr><tr><td>6</td><td>1v1 攻防</td><td>护球、变速变向过人、正面防守、捅球抢断</td><td>1v1 小门对抗、2v2</td><td>敢带敢防、丢球就追</td></tr><tr><td>7</td><td>五人制规则与站位</td><td>踢界外球、发球、门将基础、1-2-1 站位</td><td>正式 5v5 小场</td><td>懂规则、知道自己是哪个位置</td></tr><tr><td>8</td><td>综合考核与趣味比赛</td><td>五项技能闯关</td><td>分组小联赛 + 颁奖</td><td>看到进步、留下兴趣</td></tr></tbody></table></div><hr><h2 id="h2-4">3. 器材与场地准备清单</h2><p><strong>必备</strong></p><ul><li>足球：<strong>一人一球是理想状态</strong>，最低不少于 6 个（每 2 人 1 球）</li><li>雪糕筒：12–20 个（绕杆、摆门、分区）</li><li>地标碟：15–25 个（标步点、标"加速点"、摆小球门、划界）</li><li>哨子 1 个、运动手表/手机计时器</li><li>分队背心 2 种颜色（没有就用两种颜色的地标碟分人）</li></ul><p><strong>强烈建议</strong></p><ul><li>医药包：创可贴、碘伏棉签、冰袋（真草场地最容易的是擦伤和脚踝）</li><li>一大桶饮用水 + 每人自带水壶</li><li>打印好的<strong>当节课时卡</strong>（本大纲对应章节打印一页，别指望临场回忆）</li></ul><p><strong>课前 15 分钟流程</strong>：先到场摆器材（雪糕筒、地标、水）→ 再集合孩子。孩子到了才开始摆，等于白白浪费 10 分钟。</p><hr><h2 id="h2-5">4. 逐课时详案</h2><blockquote class="callout">每节课的"练习详解"里，<strong>基础版 = 6–8 岁</strong>，<strong>进阶版 = 9–10 岁</strong>。 括号里的数字是建议时长，可按实际情况前后挪 2 分钟。</blockquote><hr><h3 id="h3-5">第 1 课时：球感与触球入门</h3><p><strong>训练目标</strong>：让孩子不怕球、习惯用脚的不同部位碰球，建立"球在我脚下"的自信。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>自由带球在场地内慢跑（不许碰到别人）+ 动态拉伸</td></tr><tr><td>8–28</td><td>技术</td><td>① 脚底踩球、拉球 ② 脚内侧/脚外侧拨球、钟摆</td></tr><tr><td>28–48</td><td>游戏</td><td>鲨鱼抢球 → 带球过线比赛</td></tr><tr><td>48–56</td><td>比赛</td><td>4v4 带球过线（场地两端各一条线）</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 原地触球四件套（10 分钟，每人一球，散开 2 米间距）</strong></p><ul><li><strong>踩球</strong>：脚前掌踩在球上，左右脚交替，像原地小跑踩球。30 秒 × 3 组。</li><li><strong>脚底拉球</strong>：脚前掌踩球，向身前拉回来、再推出去，然后换另一只脚。20 次 × 2 组。</li><li><strong>内外侧拨球（钟摆）</strong>：用一只脚的内侧把球拨向另一只脚，再拨回来，像钟摆左右晃。30 秒 × 3 组。</li><li><strong>V 字拉球</strong>：脚底把球向后拉，再用同一只脚内侧向前推出，轨迹像字母 V。左右各 10 次。</li><li>基础版：允许低头看球，重点是"碰得到球"。</li><li>进阶版：要求每 5 次触球抬头看一次教练的手（教练随机伸 1–5 根手指，孩子报数）。</li></ul><p><strong>② 脚内侧触球初体验（10 分钟，两人一球，间距 3 米）</strong></p><ul><li>两人面对面站，只用脚内侧把球推给对方，不用管准不准，只要球滚过去。</li><li>基础版：先用手把球放好，再用脚内侧推。</li><li>进阶版：直接停球后回传，要求连着 5 次不失误。</li></ul><p><strong>游戏：“鲨鱼抢球”（12 分钟）</strong></p><ul><li>场地：半个五人场，用雪糕筒划出边界。</li><li>规则：每个孩子一球在场地内带球；你和 2 个大孩子当"鲨鱼"（<strong>不带球</strong>），去把孩子的球踢出界。球被踢出去的孩子做 5 次踩球后重新拿球进场。</li><li>关键：鲨鱼<strong>只能踢球，不能推人</strong>；被抢走不淘汰，只是"复活任务"，保证没人站着没事干。</li><li>进阶版：被抢后要去抢回一个球才能复活（增加对抗）。</li></ul><p><strong>比赛：“带球过线”4v4（8 分钟）</strong></p><ul><li>场地两端各用雪糕筒划一条线，<strong>没有球门</strong>。谁带球踩到对面的线就得 1 分。</li><li>为什么要这样：第 1 节课孩子还不会传球和射门，带球过线让每个人都能得分。</li><li>规则：不许推人、不许从背后踢人；得分后球交给对方从自己底线开始。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>用脚尖捅球</td><td>"用鞋带前面那块（脚背）碰球"</td></tr><tr><td>球踢两次就飞出去</td><td>"轻轻碰，球不离脚一步远"</td></tr><tr><td>站着不敢碰球</td><td>"碰坏了我负责，随便踢"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁不敢下脚、谁的球感明显好。记在心里，第 8 课时做对比。</p><p><strong>家庭小任务</strong>：每天在家/楼下，踩球 + 拉球各 50 次，两分钟就够。</p><hr><h3 id="h3-6">第 2 课时：带球跑与变向</h3><p><strong>训练目标</strong>：能抬头带着球跑起来，能用雪糕筒绕出 S 形，会 1 个变向动作。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + "教练说"（听指令做动作）</td></tr><tr><td>8–28</td><td>技术</td><td>① 脚背外侧直线运球 ② 绕雪糕筒 ③ 脚内侧/外侧变向切球</td></tr><tr><td>28–48</td><td>游戏</td><td>四门足球（4 个小门，鼓励变向）</td></tr><tr><td>48–56</td><td>比赛</td><td>4v4 带球过线（进阶版：必须绕过 1 个雪糕筒才能得分）</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 直线运球（8 分钟）</strong></p><ul><li>场地：20 米直线，4 条道，用雪糕筒做起点和终点。</li><li>要求：用<strong>脚背外侧（小脚趾那一侧）</strong>推球，触球要轻，跑一步碰一次球。</li><li>基础版：慢速，允许低头，走到终点即可。</li><li>进阶版：要求抬头（教练站在终点举数字），并且最后 5 米加速冲过终点。</li></ul><p><strong>② 绕雪糕筒 S 形（10 分钟）</strong></p><ul><li>摆法：5–6 个雪糕筒，间距 2 米排成一条直线，每个孩子一条道（不够就两条道轮换）。</li><li>要求：贴着雪糕筒绕，球始终在身体外侧，绕完最后一根加速跑 5 米。</li><li>基础版：间距拉大到 2.5–3 米，速度不限。</li><li>进阶版：间距缩到 1.5 米，并且计时，每个孩子跑 2 轮比时间。</li></ul><p><strong>③ 变向切球（10 分钟，散开、每人一球）</strong></p><ul><li><strong>脚内侧切球</strong>：向一侧带球，突然用脚内侧把球扣向另一侧。</li><li><strong>脚外侧切球</strong>：同样，用脚外侧把球拨走，然后立刻加速。</li><li>教法：先原地做 10 次（不加防守），再走三步切一次，最后教练或大孩子当"影子防守"（只跟着不抢球）。</li><li>口令："切——加速！"必须强调<strong>切完那两步加速</strong>，否则变向没意义。</li></ul><p><strong>游戏：“四门足球”（12 分钟，4v4 或 5v5）</strong></p><ul><li>用 8 个雪糕筒在场地四条边各摆一个小门（1.5 米宽），每队进攻对面两个门、防守自己这侧两个门。</li><li>好处：门前多、选择多，逼着孩子变向和观察，而不是一窝蜂追球。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>低头看球</td><td>"看我的手指！"（举手比数字）</td></tr><tr><td>一脚把球踢出去三米远</td><td>"球离脚一步远，跑了就追，追到就停"</td></tr><tr><td>绕杆时用脚内侧一下一下捅</td><td>"贴着杆走，脚背外侧推着球绕"</td></tr><tr><td>只绕不敢加速</td><td>"绕完那一下要跑起来，不然对手追上你了"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁已经能抬头带球（第 4、7 节课可以从他身上做示范）。</p><p><strong>家庭小任务</strong>：用 4 个矿泉水瓶摆一排，来回绕 10 趟。</p><hr><h3 id="h3-7">第 3 课时：脚内侧传球与停球</h3><p><strong>训练目标</strong>：能用脚内侧把球传给 5–8 米外的同伴，并且能用第一脚把球停住。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + 两人一组的抛接球游戏</td></tr><tr><td>8–28</td><td>技术</td><td>① 脚内侧推传动作分解 ② 第一脚停球</td></tr><tr><td>28–48</td><td>游戏</td><td>传球保龄球 → 抢圈（5v1）</td></tr><tr><td>48–56</td><td>比赛</td><td>3v3 小场，规则：<strong>必须传球一次以上才能得分</strong></td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 脚内侧推传（10 分钟，先对墙/对同伴静态）</strong></p><p>分解成三个口令，让孩子一次记一个部位：</p><ol><li><strong>踩</strong>：支撑脚踩在球侧方约一脚宽的地方，脚尖指向要传的方向（这是最重要的一点）。</li><li><strong>锁</strong>：踢球脚的脚踝绷紧锁死，脚内侧（脚弓）对准球的中后部。</li><li><strong>随</strong>：接触球之后脚继续朝目标方向送出去一点，不要踢完就停。</li></ol><ul><li>距离：先 3 米，再 5 米，再 8 米。</li><li>基础版：不要求停球，球到了用手拿回来再传。</li><li>进阶版：一脚出球（不停球直接回传），连续 8 次不失误。</li></ul><p><strong>② 第一脚停球（10 分钟）</strong></p><ul><li>动作要点：<strong>脚内侧迎上去，触球瞬间脚往后让一下</strong>（像接一个鸡蛋，不能顶着它）。</li><li>停球的方向：不是把球停在原地，而是<strong>停在身体前方便于下一步的斜前方</strong>。</li><li>基础版：由教练（或大孩子）在 3–4 米外<strong>轻轻把球滚过来</strong>喂球，孩子用脚内侧停住再抱起来。</li><li>进阶版：同伴用脚传过来，孩子停一次后立刻回传（一停一传）。</li><li>常见错误：脚硬邦邦不动 → 球弹出一米远。纠错口令："<strong>脚往后让，像接鸡蛋。</strong>"</li></ul><p><strong>游戏：“传球保龄球”（12 分钟）</strong></p><ul><li>用 6–8 个雪糕筒在 8 米外摆成"保龄球瓶"三角形。</li><li>孩子站在罚球点，用<strong>脚内侧推传</strong>把球滚向雪糕筒，倒一个得 1 分，每人 3 次机会。</li><li>进阶版：把雪糕筒收窄或距离拉到 10 米。</li></ul><p><strong>游戏：“抢圈 5v1”（8 分钟，视人数调整）</strong></p><ul><li>5 个人围成一个直径 6–8 米的圈，1 个人在中间抢。</li><li>传球的人不能连续两次传同一个人（逼孩子抬头找人）。</li><li>抢到球的人换到圈里被抢的那个位置——<strong>一定要轮换</strong>，否则总有孩子一直抢不到。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>支撑脚离球太远/太近</td><td>"支撑脚踩在球旁边，脚尖指着队友"</td></tr><tr><td>脚尖捅球</td><td>"脚弓推，不是脚尖点"</td></tr><tr><td>传球总是偏</td><td>"脚尖指哪儿，球去哪儿"</td></tr><tr><td>停球弹飞</td><td>"脚往后让一下，像接鸡蛋"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁传球时支撑脚指向正确，谁已经具备"传完就跑"的意识。</p><p><strong>家庭小任务</strong>：和爸爸妈妈对传 50 次，距离 5 米。</p><hr><h3 id="h3-8">第 4 课时：移动中传接与接应（二过一）</h3><p><strong>训练目标</strong>：能在跑动中接球，传完立刻跑位，会和同伴做最简单的二过一。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + "喊名字传球"（喊谁的名字传给谁）</td></tr><tr><td>8–28</td><td>技术</td><td>① 迎球跑动接球 ② 三人三角传球 ③ 二过一（地标当"墙"再换同伴）</td></tr><tr><td>28–48</td><td>游戏</td><td>4v2 抢圈 → 跑位接力</td></tr><tr><td>48–56</td><td>比赛</td><td>4v4，进球前至少出现一次二过一（可放宽为"至少传一次"）</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 迎球接球（8 分钟，两人一组，间距 8 米）</strong></p><ul><li>关键动作：<strong>球传出来的同时往前迎两步</strong>去接，不要站着等球。</li><li>接球前<strong>先回头看一次</strong>（"看一眼肩膀后面"），养成抬头观察的习惯。</li><li>基础版：教练/大孩子传球，孩子只负责迎上去停住球。</li><li>进阶版：迎球 + 停球 + 立刻传给跑动的同伴。</li></ul><p><strong>② 三人三角传球（10 分钟）</strong></p><ul><li>三人站成三角形，间距 6–8 米。传给自己左手边的人，然后<strong>跑到他的位置</strong>。</li><li>要求：球动人也动，场地上永远有两个人跑起来。</li><li>进阶版：加一个"中间人"抢断（3v1 三角传球）。</li></ul><p><strong>③ 二过一（10 分钟）</strong></p><ul><li>先用<strong>雪糕筒当地标当"墙"</strong>：孩子把球传给雪糕筒，绕过雪糕筒再把球接回来——这就是二过一的路线。</li><li>然后换成真人：A 传给 B → <strong>A 立刻从 B 身侧前插</strong> → B 一脚把球送进 A 跑动的路线上。</li><li>记住两句口令：<strong>"传了就跑"</strong>、<strong>"传到脚下前面，不是脚下"</strong>。</li><li>基础版：慢速、无防守，跑通路线就行。</li><li>进阶版：加 1 个防守者，成功 3 次换人。</li></ul><p><strong>游戏：“4v2 抢圈”（12 分钟）</strong></p><ul><li>6 人一组，4 人传球、2 人抢。传 10 次得 1 分，抢到得 1 分。每 90 秒换进抢的人。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>站着等球</td><td>"迎上去两步，别等球来找你"</td></tr><tr><td>传完就站着</td><td>"传了就跑！"</td></tr><tr><td>球传到队友身后</td><td>"传他前面，让他跑着接"</td></tr><tr><td>一直背对球场</td><td>"接球前回头看一眼"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁开始主动跑位接应——这是从"个人"到"团队"的转折点。</p><p><strong>家庭小任务</strong>：看完一场比赛（电视/手机都行），数一数球员有几次"传完就跑"。</p><hr><h3 id="h3-9">第 5 课时：射门</h3><p><strong>训练目标</strong>：会把球踢进球门；知道"打准比打狠重要"。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + 射门动作模仿（原地摆腿 10 次）</td></tr><tr><td>8–28</td><td>技术</td><td>① 脚内侧推射 ② 脚背正面抽射 ③ 一停一射</td></tr><tr><td>28–48</td><td>游戏</td><td>射门闯关（5 个点积分）→ 射门保龄球</td></tr><tr><td>48–56</td><td>比赛</td><td>4v4 带球门小场（3 分钟一轮，轮换队伍）</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 脚内侧推射（10 分钟）——先学准，再学狠</strong></p><ul><li>距离球门 6–8 米，静止球。</li><li>要点：助跑 1–2 步 → 支撑脚在球侧方、脚尖指向球门 → 脚内侧推球的中部 → 脚随摆到目标方向。</li><li>目标：<strong>先打进球门的两个下角</strong>，不是中间。</li><li>基础版：用两个雪糕筒摆一个 2 米宽的"小门"，5 米距离射雪糕筒门。</li><li>进阶版：真球门，要求左右下角各进 2 个。</li></ul><p><strong>② 脚背正面抽射（10 分钟）</strong></p><ul><li>要点：脚背绷直（脚趾往下扣）、踢球的正中心、支撑脚略微在球侧偏后、身体略前倾压住球。</li><li>关键纠错：<strong>"别把球踢到天上去"</strong> → 身体要压住球（前倾），踢球的上半部就会飞，踢中部才会平。</li><li>基础版：只要求把球踢出去、方向大致对，不求力量。</li><li>进阶版：加助跑，5 次里 3 次打在门框范围内。</li></ul><p><strong>③ 一停一射（8 分钟）</strong></p><ul><li>同伴从侧面传地滚球 → 孩子第一脚把球停到身前 → 第二脚射门。</li><li>这最接近比赛真实场景。基础版允许先停稳再射，进阶版要求 2 次触球内完成。</li></ul><p><strong>安全提醒</strong>：射门时规定<strong>从球门两侧排队</strong>，绝不站在门前和门后，捡球要等其他人都射完再统一捡；真草球门注意门框，不要挂在横梁上。</p><p><strong>游戏：“射门闯关”（12 分钟）</strong></p><ul><li>设 5 个射门点（角度、距离各不相同），每个点进球得分不同（正面近点 1 分、侧面远点 3 分）。</li><li>每人 5 球，自己记分，最后报分。孩子为了高分自己就会去练难度大的点。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>球飞得比人高</td><td>"身体前倾，压在球上面"</td></tr><tr><td>用脚尖捅</td><td>"脚背绷直，像踢正脚背"</td></tr><tr><td>只顾使劲，全部打偏</td><td>"先进两个角，再加力量"</td></tr><tr><td>射完站在门前不动</td><td>"射完退到门柱旁边"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：射门时支撑脚的位置——这是准不准的直接原因。</p><p><strong>家庭小任务</strong>：找一面墙（确认允许），对墙推射 50 次，要求每次都打在同一个 1 米见方的区域里。</p><hr><h3 id="h3-10">第 6 课时：1v1 攻防</h3><p><strong>训练目标</strong>：进攻敢带球、会用变速变向过人；防守知道怎么站位、什么时候出脚。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + "影子跟随"（两人一组，一人动一人跟）</td></tr><tr><td>8–28</td><td>技术</td><td>① 护球 ② 变速变向过人 ③ 防守站位 ④ 捅球抢断</td></tr><tr><td>28–48</td><td>游戏</td><td>1v1 小门对抗（循环赛制）</td></tr><tr><td>48–56</td><td>比赛</td><td>2v2 小场</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬（重点表扬敢防的孩子）</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 护球（6 分钟，两人一组）</strong></p><ul><li>一人带球，另一人尝试碰到球。带球的人用<strong>身体侧过来挡在球和对手之间</strong>，球放远脚。</li><li>关键：<strong>"把身体放在球和对手中间"</strong>，不是用手推人。</li><li>基础版：防守者只走不抢，带球者练转身护球。</li></ul><p><strong>② 变速变向过人（8 分钟）</strong></p><ul><li>只教两招，别教多：<ol><li><strong>变速</strong>：慢带 → 突然加速（最有效、6 岁也能学会）。</li><li><strong>变向</strong>：脚外侧切球 + 加速（第 2 课时学过，这里加人）。</li></ol></li><li>9–10 岁可以加一个<strong>简单的假动作</strong>：假装要往一边传/射，实际用脚外侧推走（不做连续踩单车，太复杂）。</li><li>练习方式：两人一组，进攻者从 10 米外出发，防守者半速（"只用 70% 的力气"），成功过半 3 次换人。</li></ul><p><strong>③ 防守站位（6 分钟）</strong></p><ul><li>站位：<strong>侧身站</strong>（不是正面站），屈膝降低重心，前脚在前，一只手在前保持平衡，和对手保持<strong>一臂距离</strong>。</li><li>原则：<strong>耐心，别急着出脚</strong>。对手没控好球的时候再抢。</li><li>口令："<strong>别扑，跟着他，等他球跑远。</strong>"</li><li><strong>明确禁止滑铲</strong>：告诉孩子"躺下去铲球是最容易受伤的动作，我们这门课不许做"。抢断只用捅球。</li></ul><p><strong>④ 捅球抢断（6 分钟）</strong></p><ul><li>动作：用脚内侧<strong>快速地捅/推</strong>球的侧面，把球从对手脚下捅走，然后自己追上去。</li><li>要点：看准机会、一步到位、捅完立刻启动，不要跟着对手跑。</li><li>基础版：对手站着不动让你捅。</li></ul><p><strong>游戏：“1v1 小门对抗”（12 分钟）</strong></p><ul><li>用雪糕筒摆两个 1.5 米小门，相距 15 米。每次两组同时进行，其他孩子在外围看并当裁判/计分。</li><li>赛制：每场 60 秒，进球多的赢。车轮战循环，保证每个人都打 3–4 场。</li><li>进阶版：赢的人留在场上当"擂主"，输的人换——但<strong>擂主连赢 3 场必须下场</strong>，防止一个大孩子霸场。</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>防守时正面直冲过去</td><td>"侧身，一臂距离，别扑"</td></tr><tr><td>一被过就放弃</td><td>"被过了就追回来，比赛还没结束"</td></tr><tr><td>进攻低着头硬撞</td><td>"抬头看对手站哪边，往空的那边跑"</td></tr><tr><td>用手推人</td><td>"手只用来保持平衡，不许推人"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁防守时肯蹲低重心、谁能忍住不出脚——这是防守天赋所在。</p><p><strong>家庭小任务</strong>：和爸爸妈妈玩"抢球"游戏 5 分钟（大人只用 50% 的力）。</p><hr><h3 id="h3-11">第 7 课时：五人制规则与站位</h3><p><strong>训练目标</strong>：会踢一场正规的五人制比赛；知道自己是哪个位置、队友拿球时该去哪儿。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸 + 传球喊名</td></tr><tr><td>8–28</td><td>技术</td><td>① 规则讲解与示范（踢界外球、发球）② 1-2-1 站位与三角形跑位 ③ 门将基础</td></tr><tr><td>28–48</td><td>游戏</td><td>半场攻防（3v2 转 4v3，练站位不追球）</td></tr><tr><td>48–56</td><td>比赛</td><td>正式 5v5（含门将轮换），教练随时暂停讲解</td></tr><tr><td>56–60</td><td>收尾</td><td>拉伸、表扬、家庭任务</td></tr></tbody></table></div><p><strong>练习详解</strong></p><p><strong>① 规则速讲（8 分钟，边讲边示范，别站着念规则）</strong></p><ul><li><strong>开球</strong>：从场地中间开球，开球不能直接射门得分（本课规则，简化处理）。</li><li><strong>界外球</strong>：球出边线 → <strong>用脚踢进场内</strong>（五人制规则是踢界外球，不用手抛），踢球时脚要踩在边线上，防守方退开 2 米。</li><li><strong>角球</strong>：球被防守方碰出底线 → 在角上踢角球。</li><li><strong>球门球</strong>：球被进攻方碰出底线 → 门将发球（本课统一用<strong>把球滚地发给最近的队友</strong>，不掷、不开大脚，简单又安全）。</li><li><strong>犯规与任意球</strong>：推人、拉人、绊人算犯规，对方在犯规地点踢任意球（防守方退开 2 米）。</li><li><strong>换人</strong>：五人制可以随时换人，从边线附近下场/上场（本课：死球时换，避免混乱）。</li><li><strong>时长</strong>：每场 8–10 分钟，中场休息 1 分钟。</li><li><strong>本课特别规则（重要）</strong>：<strong>没有头球、没有滑铲</strong>。球在空中就用胸/大腿/脚停，不用头顶。</li></ul><p><strong>② 1-2-1 菱形站位（10 分钟，用雪糕筒摆出四个点）</strong></p><ul><li>四人场上结构：<strong>1 个后卫（后场中间）+ 2 个中场（左右各一）+ 1 个前锋（前场中间）</strong>，加 1 个门将。</li><li>三条核心规则（写在纸上贴在场边）：<ol><li><strong>球在哪边，靠那边的人去抢，其他人回中间补位</strong>（不要四个人一起追球）。</li><li><strong>拿球的人至少有两个传球方向</strong>——这是"三角形"的意思。让孩子站出三角形，不要站成一条直线。</li><li><strong>丢球以后，离球最近的人立刻去逼，其他人往回跑</strong>。</li></ol></li><li>练习：不用球，教练喊"球在左边！"，孩子按站位跑位 → 再带球跑一次。</li></ul><p><strong>③ 门将基础（6 分钟，所有人轮流练）</strong></p><ul><li>站位：站在球门中间稍微靠前一点，<strong>双脚分开、膝盖微屈、重心低</strong>。</li><li>接地球：<strong>屈膝、手掌向下、把球抱在胸口</strong>（不要用手指戳）。</li><li>发球：学会用地滚球传给边上的队友，别开到天上。</li><li>心理：<strong>门将不是惩罚</strong>。轮流当，每人 3 分钟，教练在旁边陪着。</li></ul><p><strong>游戏：“半场攻防”（10 分钟）</strong></p><ul><li>3v2 → 4v3 连续进攻，练"逼抢 + 补位"。</li><li>教练只喊一句话："谁去抢？其他人回哪？"</li></ul><p><strong>常见错误与纠错口令</strong></p><div class="table-wrap"><table><thead><tr><th>错误</th><th>一句话纠错</th></tr></thead><tbody><tr><td>四个人一起追球</td><td>"球在哪边？其他人回中间！"</td></tr><tr><td>站成一条直线</td><td>"站成三角形，两个方向都能传"</td></tr><tr><td>丢球后原地抱怨</td><td>"最近的人去逼，其他往回跑"</td></tr><tr><td>门将发球开大脚</td><td>"地滚球传给边上队友"</td></tr></tbody></table></div><p><strong>教练观察点</strong>：谁在丢球后第一个往回跑——这是最值得表扬的行为。</p><p><strong>家庭小任务</strong>：看 10 分钟五人制比赛，找出"三角形"在哪里。</p><hr><h3 id="h3-12">第 8 课时：综合考核与趣味比赛</h3><p><strong>训练目标</strong>：让孩子看到自己 8 节课的进步，带着兴趣和自信继续踢下去。</p><p><strong>时间轴</strong></p><div class="table-wrap"><table><thead><tr><th>时间</th><th>环节</th><th>内容</th></tr></thead><tbody><tr><td>0–8</td><td>热身</td><td>带球慢跑 + 动态拉伸</td></tr><tr><td>8–38</td><td>技能闯关</td><td>五个关卡，每人一张记分卡</td></tr><tr><td>38–50</td><td>小联赛</td><td>分组循环赛，每场 8 分钟，2–3 场</td></tr><tr><td>50–58</td><td>颁奖</td><td>每个孩子一项奖 + 教练一句话点评</td></tr><tr><td>58–60</td><td>收尾</td><td>合影、后续训练建议、发家庭练习清单</td></tr></tbody></table></div><p><strong>五项技能闯关（每项 1–5 分，见附录 A 观察表）</strong></p><div class="table-wrap"><table><thead><tr><th>关卡</th><th>内容</th><th>打分依据</th></tr></thead><tbody><tr><td>1 绕杆</td><td>5 个雪糕筒 S 形往返，计时</td><td>时间 + 是否碰杆</td></tr><tr><td>2 传球</td><td>5 米外传向 1 米宽的雪糕筒门，5 次</td><td>命中次数</td></tr><tr><td>3 射门</td><td>8 米推射 5 次</td><td>进球数</td></tr><tr><td>4 控球</td><td>踩球 30 秒次数 / 颠球个数（按年龄选）</td><td>次数</td></tr><tr><td>5 抢圈</td><td>5v1 抢圈中的传球成功次数</td><td>成功传球数</td></tr></tbody></table></div><p><strong>小联赛组织</strong></p><ul><li>按身高 + 水平分成 3–4 队，每队 3–4 人（人数不够用 3v3）。</li><li>单循环，每场 8 分钟，进球多者胜，平局就平局（不设加时，控制时间）。</li><li>每场之间休息 2 分钟，教练利用这两分钟只讲一句观察到的亮点。</li></ul><p><strong>颁奖设计（重要）</strong> 不要只发"最佳球员"。给每个孩子一个不同的奖： 最佳进步、最努力、最佳团队球员、最强防守、最会传球、最有礼貌、最会鼓励队友、最快进步奖…… 奖状可以手写，奖品可以是一张贴纸或一颗水果——<strong>仪式感比奖品价格重要</strong>。</p><p><strong>收尾：给每个孩子一句话</strong> 按附录 A 的观察结果，对每个孩子说一句具体的话，例如：</p><ul><li>"你现在能抬头带球了，8 节课前你还要一直看着球。"</li><li>"你的传球动作已经很标准，接下来练抬头找队友。"</li><li>"你防守特别有耐心，再多练一下带球变向。"</li></ul><p><strong>后续建议</strong>：想继续的话，可以按"入门 A（1–8 课）→ 入门 B（复习 + 加入体能和更多比赛）"的节奏再来一轮，或推荐参加学校/俱乐部梯队试训。</p><hr><h2 id="h2-6">5. 附录 A：技术考核观察表（1–5 分制）</h2><p>每节课后花 2 分钟给参与的孩子打钩，第 8 课时对照第 1 课时，进步一眼就能看到。</p><div class="table-wrap"><table><thead><tr><th>项目</th><th>1 分</th><th>2 分</th><th>3 分</th><th>4 分</th><th>5 分</th></tr></thead><tbody><tr><td>球感（踩拉拨）</td><td>不敢碰球</td><td>能原地慢慢做</td><td>连续做不丢球</td><td>抬头也能做</td><td>熟练并会组合动作</td></tr><tr><td>带球跑</td><td>一碰就飞</td><td>只能直线慢跑</td><td>能绕杆不丢球</td><td>能变速变向</td><td>抬头带球、能摆脱对手</td></tr><tr><td>传球</td><td>方向随机</td><td>3 米内传出</td><td>5–8 米较准</td><td>移动中传准</td><td>会传"提前量"</td></tr><tr><td>停球</td><td>停不住/弹飞</td><td>能停住但离身远</td><td>能停到身前一步</td><td>一停一传连贯</td><td>停球即摆脱方向</td></tr><tr><td>射门</td><td>踢不到门</td><td>偶尔踢正</td><td>8 米内能进球</td><td>能打两个下角</td><td>一停一射稳定</td></tr><tr><td>1v1 进攻</td><td>不敢带</td><td>会护球</td><td>会变速过人</td><td>会变向+加速</td><td>能连续做选择</td></tr><tr><td>1v1 防守</td><td>不敢靠近</td><td>会跟着跑</td><td>站位侧身、不扑</td><td>会看准时机捅球</td><td>会逼抢+补位</td></tr><tr><td>团队与态度</td><td>不参与</td><td>参与但常放弃</td><td>愿意配合</td><td>会鼓励队友</td><td>输球后仍全力跑</td></tr></tbody></table></div><p><strong>使用建议</strong>：一节课只评 2–3 项，别每节都评全部。到第 8 课时算总分，进步幅度比绝对分数更重要。</p><hr><h2 id="h2-7">6. 附录 B：每课记录表（可打印，每节课填一张）</h2><pre>日期：____  课时：第 ___ 课   人数：____   天气：____   场地情况：____________
+
+到场名单：______________________________________________
+
+今天做到了：
+□ 按时开始  □ 每人一球  □ 每个孩子都被表扬过  □ 有比赛环节  □ 有补水
+
+本课最顺利的环节：______________________________________
+
+最难的环节／需要下节课复习：____________________________
+
+个别需要额外关注的孩子：
+姓名：________ 问题：________________ 下节课对策：________________
+
+自己的改进点（教练自评）：______________________________</pre><hr><h2 id="h2-8">7. 附录 C：常见问题（FAQ）</h2><p><strong>Q1：下雨或场地湿滑怎么办？</strong> 真草湿滑会明显增加滑倒和拉伤风险。原则是：小雨照常但取消所有加速、急停、变向类练习，改成传球和射门（可以安排在半场）；雷雨、大雨或场地有明显积水就顺延到下周，安全永远第一。</p><p><strong>Q2：某个孩子特别内向，一直不敢参与对抗？</strong> 前两节课不逼他。给他一个"任务型角色"：捡球、数数、当裁判、当小队长。等他熟悉了你和其他孩子，第 3–4 课时再让他进 1v1。绝大多数孩子只要不被嘲笑，四五节课后就会主动往前冲。</p><p><strong>Q3：有个大孩子（10 岁）水平明显高出一截，觉得无聊怎么办？</strong> 给他加难度而不是加压力：要求他用弱侧脚、要求他两次触球内出球、要求他当"教练助手"去带一个 6 岁的孩子。有身份的挑战比"你再进一个球"有效得多。</p><p><strong>Q4：人数不稳定，今天 5 个明天 12 个怎么办？</strong> 按 4v4 最小规模设计核心环节，多出来的人在旁边随时轮换（每 3 分钟换一批）。抢圈（4v2/5v1）是最抗人数波动的练习，人多就多摆两个圈。</p><p><strong>Q5：只有一个足球怎么办？</strong> 先做无球的热身和跑位练习 → 把技术环节改成"排队轮流 + 其他人做无球动作模仿"（模仿也是学习）→ 比赛照常打。但请尽量争取<strong>至少每 2 人 1 球</strong>，否则训练效率会下降一半以上，这也是建议家长各带一个球的原因。</p><p><strong>Q6：家长在场边指挥甚至批评孩子怎么办？</strong> 开课前统一说一次家长须知：请在场边加油，不要指挥战术、不要在孩子失误时出声。可以给家长派活：帮忙看时间、拍照、给水。有事情做，家长就不会一直喊。</p><p><strong>Q7：孩子哭了、闹情绪、吵架了怎么办？</strong> 先把他带离场地 10 秒，蹲下来和他平视，只问一句"你需要休息一下还是继续？"。不要当众评判谁对谁错，也不要用"再哭就别踢了"威胁。等情绪下来再回场。真正的冲突（推人、打架）让双方先各坐 1 分钟再握个手。</p><p><strong>Q8：我该在什么时候说"做得好"？</strong> 说在你看到<strong>行为</strong>的那一刻，并且说清楚是什么行为："你刚才传球之前回头看了一眼，非常好"——比"你真棒"有用十倍。</p><p><strong>Q9：孩子总想射门 / 总想当门将 / 总想当前锋怎么办？</strong> 轮流当门将（每人 3 分钟），进球后换位。进攻和防守的位置在 6–10 岁<strong>每节课都要轮换</strong>，这个年龄不该固定位置。</p><p><strong>Q10：我一节课讲不完计划的内容怎么办？</strong> 太正常了。8 节课的进度表是方向，不是考卷。<strong>宁可某个技术下节课再练，也不要为了赶进度砍掉比赛。</strong></p><hr><h2 id="h2-9">8. 教练自备：一页速查（课前 30 秒看一眼）</h2><ul><li>今天第几课？主题是什么？</li><li>三个环节时长：热身 8′ / 技术 20′ / 游戏 20′ / 比赛 8′ / 收尾 4′</li><li>器材摆好了吗？边界划了吗？水分好了吗？</li><li>安全底线：不头球、不滑铲、门前不站人、湿滑降强度。</li><li>今天要表扬谁？（至少准备 3 个具体表扬）</li><li>家庭小任务是什么？下课前 30 秒一定要说。</li></ul><hr><p><strong>祝你和孩子们玩得开心。</strong> 这份大纲不需要你成为持证教练，只需要你每节课准时到场、器材先摆好、多鼓励少批评——做到这三件事，8 节课后孩子们的进步会让你自己都意外。</p>
+  </main>
+</div>
+<button class="btn" id="toTop" type="button" title="回到顶部">↑</button>
+<script>
+(function(){
+  var root=document.documentElement;
+  var saved=null;
+  try{saved=localStorage.getItem('dsh-doc-theme')}catch(e){}
+  if(saved){root.setAttribute('data-theme',saved)}
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){root.setAttribute('data-theme','dark')}
+  var t=document.getElementById('themeBtn');
+  function label(){t.textContent=root.getAttribute('data-theme')==='dark'?'浅色':'深色'}
+  label();
+  t.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('dsh-doc-theme',next)}catch(e){}
+    label();
+  });
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  var heads=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1))}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id)});
+        }
+      });
+    },{rootMargin:'-72px 0px -70% 0px',threshold:0});
+    heads.forEach(function(h){obs.observe(h)});
+  }
+  var up=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){up.classList.toggle('show',window.scrollY>600)},{passive:true});
+  up.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+})();
+</script>
+</body>
+</html>
